@@ -1,0 +1,29 @@
+# --- Python & Environment ---
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# --- Security & Secrets (CRITICAL) ---
+# We ignore the actual secrets but keep the example for others
+.env
+.env.local
+.aws/
+credentials
+config
+
+# --- IDEs & Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Logs & Performance ---
+*.log
+.ipynb_checkpoints/
+
+# --- System Files ---
+.DS_Store
+Thumbs.db
