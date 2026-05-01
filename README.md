@@ -12,8 +12,6 @@ This project focuses on building an **AI-driven IDS** that learns normal network
 
 The system uses an **Isolation Forest algorithm**, an unsupervised machine learning technique designed to detect anomalies in data without requiring labeled datasets.
 
-The idea is simple:
-
 * Normal traffic behaves consistently
 * Anomalies are rare and significantly different
 * The model isolates these anomalies and flags them for review
@@ -25,13 +23,13 @@ The idea is simple:
 ### Pipeline Overview:
 
 1. **Data Collection**
-   AWS VPC Flow Logs capture network traffic data.
+   AWS VPC Flow Logs capture network traffic data
 
 2. **Storage**
-   Logs are stored as compressed `.gz` files in an Amazon S3 bucket.
+   Logs are stored as compressed `.gz` files in an Amazon S3 bucket
 
 3. **Data Processing**
-   A Python script fetches the most recent log file using `boto3` and processes it in memory using `gzip` and `io.BytesIO`.
+   A Python script fetches the most recent log file using `boto3` and processes it in memory using `gzip` and `io.BytesIO`
 
 4. **Feature Engineering**
    The following features are extracted:
@@ -42,10 +40,10 @@ The idea is simple:
    * Destination Port
 
 5. **Anomaly Detection**
-   The Isolation Forest model is trained on the current dataset and assigns anomaly scores.
+   The Isolation Forest model is trained on the current dataset and assigns anomaly scores
 
 6. **Alerting**
-   If anomalies are detected, an alert is sent via AWS SNS with key traffic details.
+   If anomalies are detected, an alert is sent via AWS SNS with key traffic details
 
 ---
 
@@ -65,25 +63,35 @@ The idea is simple:
 ## 🚧 Challenges & Learnings
 
 * **Handling Compressed Logs**
-  AWS stores logs in compressed `.gz` format. I implemented in-memory decompression using `io.BytesIO` to avoid disk overhead and improve performance.
+  AWS stores logs in compressed `.gz` format. I implemented in-memory decompression using `io.BytesIO` to avoid disk overhead and improve performance
 
 * **Selecting Relevant Features**
-  Choosing meaningful network features (packets, bytes, ports) was critical for effective anomaly detection.
+  Choosing meaningful network features (packets, bytes, ports) was critical for effective anomaly detection
 
 * **Reducing False Positives**
-  Initial runs flagged too many normal events as anomalies. Tuning the `contamination` parameter helped balance sensitivity and accuracy.
+  Initial runs flagged too many normal events as anomalies. Tuning the `contamination` parameter helped balance sensitivity and accuracy
+
+---
+
+## 📸 Sample Alert Output
+
+![AI Security Alert](images/ai-security-alert.png)
+
+*This alert was triggered after detecting unusual traffic patterns in AWS VPC Flow Logs.*
 
 ---
 
 ## 📂 Project Structure
 
-```id="......"
+```
 AI-Cloud-IDS/
 │
-├── ids_ai_logic.py     # Main detection script
-├── README.md           # Documentation
-├── requirements.txt    # Dependencies
-└── .gitignore
+├── ids_ai_logic.py        # Main detection script
+├── README.md              # Documentation
+├── requirements.txt       # Dependencies
+├── .gitignore
+└── images/
+    └── ai-security-alert.png
 ```
 
 ---
@@ -92,14 +100,14 @@ AI-Cloud-IDS/
 
 ### 1. Clone the Repository
 
-```id="a7c5wr"
-git clone https://github.com/your-username/AI-Cloud-IDS.git
+```
+git clone https://github.com/doolamdattatreya2025/AI-Cloud-IDS.git
 cd AI-Cloud-IDS
 ```
 
 ### 2. Install Dependencies
 
-```id="rq8j2c"
+```
 pip install -r requirements.txt
 ```
 
@@ -115,7 +123,7 @@ Update the following variables in the script:
 
 ### 4. Run the Script
 
-```id="t9w2l1"
+```
 python ids_ai_logic.py
 ```
 
